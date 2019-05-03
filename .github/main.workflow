@@ -1,6 +1,6 @@
-workflow "Install Dependencies" {
-  on = "push"
+workflow "Install, Test and Deploy" {
   resolves = ["Publish to netlify"]
+  on = "push"
 }
 
 action "Installing" {
