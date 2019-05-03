@@ -1,6 +1,6 @@
 workflow "Install, Test and Deploy" {
-  resolves = ["Publish to netlify"]
   on = "push"
+  resolves = ["Send SMS"]
 }
 
 action "Installing" {
@@ -19,4 +19,15 @@ action "Publish to netlify" {
   needs = ["Testing"]
   runs = "npm run build"
   secrets = ["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]
+}
+
+action "Send SMS" {
+  uses = "swinton/httpie.action@8ab0a0e926d091e0444fcacd5eb679d2e2d4ab3d"
+  needs = ["Publish to netlify"]
+  args = ["POST", "https://api.twilio.com/2010-04-01/Accounts/$ACCOUNT_SID/Messages.json", "Authorization: Basic $AUTH_VALUE", "body=Deployment Ready: $GITHUB_REPOSITORY", "to=+51966528536", "from=+14694252086"]
+  secrets = [
+    "ACCOUNT_SID",
+    "AUTH_TOKEN",
+    "AUTH_VALUE",
+  ]
 }
