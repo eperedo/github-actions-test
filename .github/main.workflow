@@ -24,7 +24,7 @@ action "Publish to netlify" {
 action "Send SMS" {
   uses = "swinton/httpie.action@8ab0a0e926d091e0444fcacd5eb679d2e2d4ab3d"
   needs = ["Publish to netlify"]
-  args = ["POST", "https://api.twilio.com/2010-04-01/Accounts/$ACCOUNT_SID/Messages.json", "Authorization: Basic:$AUTH_VALUE", "body=Deployment Ready: $GITHUB_REPOSITORY", "to=+51966528536", "from=+14694252086"]
+  args = ["POST", "https://api.twilio.com/2010-04-01/Accounts/$ACCOUNT_SID/Messages.json", "Authorization: Basic:$AUTH_VALUE", "body=Deployment-Ready:$GITHUB_REPOSITORY", "to=+51966528536", "from=+14694252086"]
   secrets = [
     "ACCOUNT_SID",
     "AUTH_TOKEN",
