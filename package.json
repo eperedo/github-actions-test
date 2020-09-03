@@ -5,7 +5,7 @@
   "build": "netlify deploy --dir=public --prod"
 },
 "dependencies": {
-"@hapi/hapi": "18.3.1"
+"@hapi/hapi": "20.0.0"
 },
 "devDependencies": {
 "jest": "24.7.1",
